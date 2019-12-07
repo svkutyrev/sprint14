@@ -53,7 +53,7 @@ module.exports.login = (req, res) => {
       // eslint-disable-next-line no-undef
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       res.cookie('token', token);
-      res.status(200).send({ message: 'You are autorizade' });
+      res.status(200).send({ token });
     })
     .catch((err) => {
       res.status(401).send({ message: err.message });
