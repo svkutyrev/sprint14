@@ -1,3 +1,6 @@
+/* eslint-disable consistent-return */
+/* eslint-disable dot-notation */
+/* eslint-disable prefer-destructuring */
 const express = require('express');
 const cookie = require('cookie-parser');
 const jwt = require('jsonwebtoken');

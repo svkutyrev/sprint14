@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 require('dotenv').config();
 const express = require('express');
 const cookie = require('cookie-parser');
@@ -30,7 +31,18 @@ module.exports.createUser = (req, res) => {
       email,
       password: hash,
     }))
-    .then((user) => res.send({ user }))
+
+    .then(({
+      name,
+      about,
+      avatar,
+      email,
+    }) => res.send({
+      name,
+      about,
+      avatar,
+      email,
+    }))
     .catch((err) => res.status(404).send({ message: err.message }));
 };
 
@@ -51,7 +63,7 @@ module.exports.login = (req, res) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       // eslint-disable-next-line no-undef
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, 'super-strong-secret', { expiresIn: '7d' });
       res.cookie('token', token);
       res.status(200).send({ token });
     })
