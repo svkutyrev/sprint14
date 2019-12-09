@@ -20,12 +20,16 @@ module.exports.createCard = (req, res) => {
 module.exports.deleteCard = (req, res) => {
   Card.findById(req.params.cardId)
     .then((card) => {
-      if (card.owner.toString() === req.user._id) {
-        Card.findByIdAndRemove(req.params.cardId)
-          .then((cardRemove) => res.send({ remove: cardRemove }))
-          .catch((err) => res.status(500).send({ message: err }));
+      if (card) {
+        if (card.owner.toString() === req.user._id) {
+          Card.findByIdAndRemove(req.params.cardId)
+            .then((cardRemove) => res.send({ remove: cardRemove }))
+            .catch((err) => res.status(500).send({ message: err }));
+        } else {
+          res.status(404).send({ message: 'Это не ваша карта' });
+        }
       } else {
-        res.send({ message: 'Это не ваша карта' });
+        res.status(404).send({ message: 'Карточка не найдена' });
       }
     })
     .catch((err) => res.status(404).send({ message: err.message }));

@@ -43,7 +43,7 @@ module.exports.createUser = (req, res) => {
       avatar,
       email,
     }))
-    .catch((err) => res.status(404).send({ message: err.message }));
+    .catch(() => res.status(404).send({ message: 'Введите все данные корректно' }));
 };
 
 module.exports.getUser = (req, res) => {

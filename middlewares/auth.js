@@ -9,7 +9,7 @@ const app = express();
 app.use(cookie());
 
 module.exports = (req, res, next) => {
-  const token = req.cookies['token'];
+  const token = req.cookies.token;
   if (!token) {
     return res.status(401).send({ message: 'Необходимо авторизоваться!' });
   }
