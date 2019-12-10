@@ -1,4 +1,4 @@
-# https://svkutyrev.github.io/sprint14/ v1.1 releases 1
+
 
 Реализован функционал REST API для проекта Mesto, для запуска необходимо:
 
